@@ -60,3 +60,5 @@ for i in range(0, len(playlist_ids), 100):
     num_tracks_added += num_tracks_to_add
 
 print(f"Playlist '{playlist_name}' created successfully!")
+print(f"Playlist URL: {playlist['external_urls']['spotify']}")
+print(f"Number of tracks added: {num_tracks_added}")
