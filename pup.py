@@ -5,12 +5,10 @@ from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env file
 
-
 # Read Spotify API credentials from environment variables
 client_id = os.getenv("SPOTIPY_CLIENT_ID")
 client_secret = os.getenv("SPOTIPY_CLIENT_SECRET")
 redirect_uri = os.getenv("SPOTIPY_REDIRECT_URI")
-
 
 # Authenticate with Spotify API
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
@@ -22,6 +20,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
 fav_artist = input("Enter your favorite artist: ")
 genre = input("Enter your favorite genre: ")
 sample_song = input("Enter a sample song: ")
+playlist_length = int(input("Enter the desired playlist length (number of tracks): "))
 
 # Search for top tracks of favorite artist
 results = sp.search(q=fav_artist, type="artist")
@@ -52,7 +51,12 @@ playlist_ids = list(set(track_ids[:20] + similar_ids + related_ids))
 playlist_name = input("Enter a name for your playlist: ")
 playlist_description = f"Recommended playlist based on {fav_artist}, {genre}, and {sample_song}"
 playlist = sp.user_playlist_create(user=sp.me()["id"], name=playlist_name, public=True, description=playlist_description)
+num_tracks_added = 0
 for i in range(0, len(playlist_ids), 100):
-    sp.playlist_add_items(playlist_id=playlist["id"], items=playlist_ids[i:i+100])
+    if num_tracks_added >= playlist_length:
+        break
+    num_tracks_to_add = min(playlist_length - num_tracks_added, 100)
+    sp.playlist_add_items(playlist_id=playlist["id"], items=playlist_ids[i:i+num_tracks_to_add])
+    num_tracks_added += num_tracks_to_add
 
 print(f"Playlist '{playlist_name}' created successfully!")
