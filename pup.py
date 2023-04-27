@@ -25,8 +25,8 @@ playlist_length = int(input("Enter the desired playlist length (number of tracks
 # Search for top tracks of favorite artist
 results = sp.search(q=fav_artist, type="artist")
 artist_id = results["artists"]["items"][0]["id"]
-top_tracks = sp.artist_top_tracks(artist_id, country="US")["tracks"]
-track_ids = [track["id"] for track in top_tracks]
+top_tracks = sp.artist_top_tracks(artist_id, country="US")["tracks"] # Get top tracks in US because Algerian Spotify is trash
+track_ids = [track["id"] for track in top_tracks if track["popularity"] >= 70] # Only add tracks with popularity >= 70
 
 # Search for similar songs based on sample song
 sample_results = sp.search(q=sample_song, type="track")
@@ -35,14 +35,14 @@ if sample_results["tracks"]["total"] == 0:
 else:
     sample_track_id = sample_results["tracks"]["items"][0]["id"]
     similar_tracks = sp.recommendations(seed_tracks=[sample_track_id], limit=10)["tracks"]
-    similar_ids = [track["id"] for track in similar_tracks]
+    similar_ids = [track["id"] for track in similar_tracks if track["popularity"] >= 70] # Only add tracks with popularity >= 70
 
 # Get similar artists and their top tracks
 related_artists = sp.artist_related_artists(artist_id)["artists"]
 related_tracks = []
 for artist in related_artists:
-    related_tracks.extend(sp.artist_top_tracks(artist["id"])["tracks"])
-related_ids = [track["id"] for track in related_tracks]
+    related_tracks.extend(sp.artist_top_tracks(artist["id"], country="US")["tracks"]) # Get top tracks in US because Algerian Spotify is trash
+related_ids = [track["id"] for track in related_tracks if track["popularity"] >= 70] # Only add tracks with popularity >= 70
 
 # Combine track IDs and remove duplicates
 playlist_ids = list(set(track_ids[:20] + similar_ids + related_ids))
