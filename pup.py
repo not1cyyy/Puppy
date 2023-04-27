@@ -63,6 +63,3 @@ print(f"Playlist '{playlist_name}' created successfully!")
 print(f"Playlist URL: {playlist['external_urls']['spotify']}")
 print(f"Number of tracks added: {len(playlist_ids)}")
 print(f"Number of tracks skipped: {num_tracks_added - len(playlist_ids)}")
-print("Playlist tracks:")
-for i, track in enumerate(sp.playlist_tracks(playlist_id=playlist["id"])["items"]):
-    print(f"{i+1}. {track['track']['name']} - {track['track']['artists'][0]['name']}")
