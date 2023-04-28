@@ -25,7 +25,7 @@ if playlist_length == "":
     playlist_length = 100
 else:
     playlist_length = int(playlist_length)
-popularity = input("Enter the desired popularity of tracks (0-100) (or leave blank for no popularity search): ")
+popularity = input("Enter the desired popularity of tracks (0-100) (or leave blank for no popularity search, better to get more tracks): ")
 if popularity == "":
     popularity = ""
 else:
