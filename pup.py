@@ -36,7 +36,7 @@ playlist_name = input("Enter a name for your playlist: ")
 # fav_artist = "Serhat Durmus"
 # genre = "trap"
 # sample_song = "Serhat Durmus - Hislerim (feat. Zerrin)"
-# playlist_length = 100
+# playlist_length = 20
 # popularity = ""
 # playlist_name = f"Alger"
 #--------------------------------
@@ -76,11 +76,15 @@ else:
     related_ids = [track["id"] for track in related_tracks] 
 
 # Combine track IDs and remove duplicates
-playlist_ids = list(set(track_ids + similar_ids + related_ids ))
+playlist_ids = list(set(similar_ids + related_ids))
+playlist_ids.extend(track_ids) # Add top tracks of favorite artist
+playlist_ids.append(sample_track_id)
+playlist_ids = playlist_ids[::-1] # Reverse list so that sample song is first
 
-# Add sample song to playlist if it's not already in there
-if sample_track_id not in playlist_ids:
-    playlist_ids.append(sample_track_id)
+# remove duplicates
+playlist_ids = list(dict.fromkeys(playlist_ids))
+
+
 
 # Create a new playlist and add tracks to it in batches of 100
 playlist_description = f"Recommended playlist based on {fav_artist}, {genre}, and {sample_song}"
