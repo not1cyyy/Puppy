@@ -10,6 +10,22 @@ Puppyは、Spotify API を使用して、あなたが好きなアーティスト
 
 ぜひ Puppy を使って、あなたの音楽ライフを充実させてください！
 
+# インストール方法
+
+1- このリポジトリをクローンします。
+
+2- 必要なPythonパッケージをインストールします。
+
+3- Spotify APIのクライアントID、シークレット、リダイレクトURIを設定します。
+
+4- `python pup.py`を実行して、プレイリストを作成します。
+
+# ライセンス
+
+このソフトウェアは、GPL3 ライセンスの下で公開されています。詳細については、LICENSEファイルを参照してください。
+
+
+
 # Hello ! I'm Puppy
 
 hello! I'm Puppy! I'm a Python script that gives you recommended playlists based on your favorite artists, genres and sample songs on Spotify!
@@ -21,3 +37,17 @@ Puppy uses the Spotify API to find top tracks from artists you like, find simila
 You can also easily set the length of your playlist. Just enter the number of songs you want and Puppy will add the number of songs you need. We pick only the most relevant songs to give you the best playlist!
 
 Please use Puppy and enrich your music life!
+
+# Installation
+
+1- Clone this repository
+
+2- Install the required python packages
+
+3- Set client ID, secret and redirect URI for Spotify API
+
+4- Run with `python pup.py`
+
+# Licence
+
+This software is released under the GPL3 license. See the LICENSE file for details. 
