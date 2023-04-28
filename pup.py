@@ -30,6 +30,7 @@ if popularity == "":
     popularity = ""
 else:
     popularity = int(popularity)
+playlist_name = input("Enter a name for your playlist: ")
 
 #--------------------------------
 # fav_artist = "Serhat Durmus"
@@ -37,6 +38,7 @@ else:
 # sample_song = "Serhat Durmus - Hislerim (feat. Zerrin)"
 # playlist_length = 100
 # popularity = ""
+# playlist_name = f"Alger"
 #--------------------------------
 
 
@@ -81,8 +83,6 @@ if sample_track_id not in playlist_ids:
     playlist_ids.append(sample_track_id)
 
 # Create a new playlist and add tracks to it in batches of 100
-playlist_name = input("Enter a name for your playlist: ")
-# playlist_name = f"Alger"
 playlist_description = f"Recommended playlist based on {fav_artist}, {genre}, and {sample_song}"
 playlist = sp.user_playlist_create(user=sp.me()["id"], name=playlist_name, public=True, description=playlist_description)
 num_tracks_added = 0
